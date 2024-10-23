@@ -1,0 +1,88 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.7'
+    id 'io.spring.dependency-management' version '1.1.5'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+
+//    compile：源代码（src/main/java）编译时的依赖，最常用
+//    runtime：源代码（src/main/java）执行时依赖
+//    testCompile：测试代码（src/main/test）编译时的依赖
+//    testRuntime：测试代码（src/main/java）执行时的依赖
+//    archives：项目打包（e.g.jar）时的依赖
+
+    // 本地jar引入
+//    implementation files('lib/jacob.jar')
+
+    // 依赖lib目录下的所有以.jar结尾的文件
+//    implementation fileTree(dir: 'lib', includes: ['*.jar'])
+
+    // 依赖lib目录下的除了xxx.jar以外的所有以.jar结尾的文件
+//    implementation fileTree(dir: 'lib', excludes: ['xxx.jar'], includes: ['*.jar'])
+
+    // https://mvnrepository.com/artifact/net.sf.jacob-project/jacob
+    implementation group: 'net.sf.jacob-project', name: 'jacob', version: '1.14.3'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '3.0.3'
+    implementation group: 'com.baomidou', name: 'mybatis-plus-boot-starter', version: '3.5.5'
+    implementation group: 'io.minio', name: 'minio', version: '8.5.10'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.16.1'
+
+// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '3.3.3'
+    implementation 'cn.dev33:sa-token-redis-jackson:1.38.0'
+    implementation 'org.apache.commons:commons-pool2'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '3.3.1'
+    implementation 'com.aizuda:flowlong-spring-boot-starter:0.0.10'
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.10.1'
+    implementation group: 'cloud.tianai.captcha', name: 'tianai-captcha', version: '1.5.0'
+    implementation 'cn.dev33:sa-token-spring-boot3-starter:1.38.0'
+
+
+    // mybatis plus增强工具 按需只引入自动建表功能
+    // https://mvnrepository.com/artifact/com.tangzc/mybatis-plus-ext-autotable-core
+    implementation group: 'com.tangzc', name: 'mybatis-plus-ext-autotable-core', version: '3.5.8-EXT700'
+
+
+    // https://mvnrepository.com/artifact/org.apache.poi/poi
+    implementation group: 'org.apache.poi', name: 'poi', version: '5.3.0'
+
+
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.34'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        resources {
+            srcDirs = ['src/main/resources', 'src/main/java']
+            includes = ['**/*.xml','**/*.yml','**/*.properties','**/*.yml','**/*.txt','**/*.jar']
+        }
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

@@ -1,0 +1,56 @@
+spring:
+  lifecycle:
+    # 配置优雅停机后的缓冲器 最大等待时间
+    timeout-per-shutdown-phase: 10S
+  datasource: # 数据源配置
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+#    username: root
+#    password: 1585746709Lcy
+    username: root
+    password: 1585746709Lcy
+    url: jdbc:mysql://1.92.159.253:3306/demo?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+  data:
+    redis:
+      # Redis数据库索引（默认为0）
+      database: 1
+      # Redis服务器地址
+      host: 1.92.159.253
+      # Redis服务器连接端口
+      port: 26379
+      # Redis服务器连接密码（默认为空）
+      password: 158574
+      # 连接超时时间
+      timeout: 10s
+      lettuce:
+        pool:
+          # 连接池最大连接数
+          max-active: 200
+          # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-wait: -1ms
+          # 连接池中的最大空闲连接
+          max-idle: 10
+          # 连接池中的最小空闲连接
+          min-idle: 0
+
+mybatis:
+  table
+
+mybatis-plus:
+  mapper-locations: classpath:com/example/demo/**/dao/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+    banner: false
+
+minio:
+  endpoint: http://1.92.159.253:15857
+  accessKey: 8757247463d512347a940ef902dd8acb
+  secretKey: 1e9d645916c7e2679f41b88dfb71d009
+  bucketName: buildyourdream
+  url: http://1.92.159.253:15857/
