@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.2.7'
+    id 'org.springframework.boot' version '3.2.0'
     id 'io.spring.dependency-management' version '1.1.5'
 }
 
@@ -35,8 +35,6 @@ dependencies {
     // 依赖lib目录下的除了xxx.jar以外的所有以.jar结尾的文件
 //    implementation fileTree(dir: 'lib', excludes: ['xxx.jar'], includes: ['*.jar'])
 
-    // https://mvnrepository.com/artifact/net.sf.jacob-project/jacob
-    implementation group: 'net.sf.jacob-project', name: 'jacob', version: '1.14.3'
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '3.0.3'
@@ -49,9 +47,7 @@ dependencies {
     implementation 'cn.dev33:sa-token-redis-jackson:1.38.0'
     implementation 'org.apache.commons:commons-pool2'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '3.3.1'
-    implementation 'com.aizuda:flowlong-spring-boot-starter:0.0.10'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.10.1'
-    implementation group: 'cloud.tianai.captcha', name: 'tianai-captcha', version: '1.5.0'
     implementation 'cn.dev33:sa-token-spring-boot3-starter:1.38.0'
 
 
