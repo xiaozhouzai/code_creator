@@ -17,7 +17,14 @@ repositories {
     mavenCentral()
 }
 
+// 在 build.gradle 文件中
+def versionsProperties = new Properties()
+rootProject.file('versions.properties').withReader { reader -> versionsProperties.load(reader) }
+
 dependencies {
+
+
+//    https://mvnrepository.com  MAVEN仓库
 
 
 //    compile：源代码（src/main/java）编译时的依赖，最常用
@@ -37,27 +44,24 @@ dependencies {
 
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '3.0.3'
-    implementation group: 'com.baomidou', name: 'mybatis-plus-boot-starter', version: '3.5.5'
-    implementation group: 'io.minio', name: 'minio', version: '8.5.10'
-    implementation group: 'commons-io', name: 'commons-io', version: '2.16.1'
+    implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: versionsProperties['mybatis.version']
+    implementation group: 'com.baomidou', name: 'mybatis-plus-boot-starter', version: versionsProperties['mybatis-plus.version']
+    implementation group: 'io.minio', name: 'minio', version: versionsProperties['minio.version']
+    implementation group: 'commons-io', name: 'commons-io', version: versionsProperties['commons-io.version']
 
-// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '3.3.3'
-    implementation 'cn.dev33:sa-token-redis-jackson:1.38.0'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: versionsProperties['validation.version']
+    implementation "cn.dev33:sa-token-redis-jackson:${versionsProperties['sa-token.version']}"
     implementation 'org.apache.commons:commons-pool2'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '3.3.1'
-    implementation group: 'com.google.code.gson', name: 'gson', version: '2.10.1'
-    implementation 'cn.dev33:sa-token-spring-boot3-starter:1.38.0'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: versionsProperties['redis.version']
+    implementation group: 'com.google.code.gson', name: 'gson', version: versionsProperties['gson.version']
+    implementation "cn.dev33:sa-token-spring-boot3-starter:${versionsProperties['sa-token.version']}"
 
 
     // mybatis plus增强工具 按需只引入自动建表功能
-    // https://mvnrepository.com/artifact/com.tangzc/mybatis-plus-ext-autotable-core
-    implementation group: 'com.tangzc', name: 'mybatis-plus-ext-autotable-core', version: '3.5.8-EXT700'
+    implementation group: 'com.tangzc', name: 'mybatis-plus-ext-autotable-core', version: versionsProperties['mybatis-plus-ext.version']
 
 
-    // https://mvnrepository.com/artifact/org.apache.poi/poi
-    implementation group: 'org.apache.poi', name: 'poi', version: '5.3.0'
+    implementation group: 'org.apache.poi', name: 'poi', version: versionsProperties['poi.version']
 
 
     runtimeOnly 'com.mysql:mysql-connector-j'
@@ -74,7 +78,7 @@ sourceSets {
         }
         resources {
             srcDirs = ['src/main/resources', 'src/main/java']
-            includes = ['**/*.xml','**/*.yml','**/*.properties','**/*.yml','**/*.txt','**/*.jar']
+            includes = ['**/*.xml','**/*.yml','**/*.properties','**/*.yml','**/*.txt','**/*.jar','/*.properties']
         }
     }
 }
