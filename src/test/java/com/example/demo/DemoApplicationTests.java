@@ -3,9 +3,6 @@ package com.example.demo;
 
 import com.example.demo.system.user.dao.SysUsersMapper;
 import com.example.demo.system.user.domain.SysUsers;
-import com.jacob.activeX.ActiveXComponent;
-import com.jacob.com.Dispatch;
-import com.jacob.com.Variant;
 import io.minio.GetObjectArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
@@ -170,22 +167,6 @@ class DemoApplicationTests {
         int nextSid = inputStream.getNextSid();
         System.out.println(nextSid);
         System.out.println("版本号:" + biffVersion + ",文件类型:" + fileType);
-    }
-
-
-
-    @Test
-    void testConvertOldXls() {
-        File newFile = new File("C:\\IdeaFile\\IDEA\\JavaProject\\demo\\src\\main\\resources\\static\\new.xlsx");
-        File oldFile = new File("C:\\IdeaFile\\IDEA\\JavaProject\\demo\\src\\main\\resources\\static\\工作簿2是.xls");
-
-        ActiveXComponent xl = new ActiveXComponent("Excel.Application");//这里也可以Word等
-        xl.setProperty("Visible", new Variant(false));
-        Dispatch workbook = xl.getProperty("Workbooks").toDispatch();
-        workbook = Dispatch.invoke(workbook, "Open", Dispatch.Method, new Object[]{
-                oldFile.getAbsolutePath(), new Variant(false)}, new int[1]).toDispatch();
-        Dispatch.call(workbook, "SaveAS", newFile.getAbsolutePath(), 51);//51代表什么，参考下表
-        Dispatch.call(workbook, "Close", new Variant(false));
     }
 
     @Test
